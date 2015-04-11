@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">thebackend</string>
-    <string name="camera_button">I think I get it know!</string>
+    <string name="app_name">Bones</string>
+    <string name="camera_button">This is a start</string>
     <string name="hello_world">Hello world!</string>
-    <string name="image_cd_camera">This is a generic content description </string>
+    <string name="image_cd_camera">This is a generic content description</string>
     <string name="action_settings">Settings</string>
 </resources>
