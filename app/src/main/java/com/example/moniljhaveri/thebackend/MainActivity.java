@@ -33,6 +33,9 @@ public class MainActivity extends Activity {
 
         Button cameraButton = (Button) findViewById(R.id.camera_button);
         cameraButton.setOnClickListener(cameraListener);
+
+        Button libraryButton = (Button) findViewById(R.id.library_button);
+        libraryButton.setOnClickListener(libraryListener);
     }
 
     private OnClickListener cameraListener = new OnClickListener() {
@@ -40,27 +43,34 @@ public class MainActivity extends Activity {
             takePhoto(v);
         }
     };
+    private OnClickListener libraryListener = new OnClickListener() {
+        public void onClick(View view) {
 
-//    private void takePhoto(View v) {
-//        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-//        File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "pictures.jpeg");
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-//        imageUri = Uri.fromFile(photo);
-//        startActivityForResult(intent, TAKE_PICTURE);
-//    }
+        }
+    };
 
-    public void takePhoto(View v) {
-        // tell the phone we want to use the camera
+    //private OnClickListener backbuttonListener = (v) ->
+
+    private void takePhoto(View v) {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        // create a new temp file called pic.jpg in the "pictures" storage area of the phone
-        File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "pic.jpg");
-        // take the return data and store it in the temp file "pic.jpg"
+        File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "pictures.jpeg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-        // stor the temp photo uri so we can find it later
         imageUri = Uri.fromFile(photo);
-        // start the camera
         startActivityForResult(intent, TAKE_PICTURE);
     }
+
+//    public void takePhoto(View v) {
+//        // tell the phone we want to use the camera
+//        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//        // create a new temp file called pic.jpg in the "pictures" storage area of the phone
+//        File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "pic.jpg");
+//        // take the return data and store it in the temp file "pic.jpg"
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+//        // stor the temp photo uri so we can find it later
+//        imageUri = Uri.fromFile(photo);
+//        // start the camera
+//        startActivityForResult(intent, TAKE_PICTURE);
+//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
