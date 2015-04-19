@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    >
 
     <Button
         android:id="@+id/camera_button"
@@ -18,18 +19,15 @@
     <ImageView
         android:id="@+id/image_camera"
         android:contentDescription="@string/image_cd_camera"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView" />
-    <ImageView
-        android:id="@+id/image_camera"
-        android:contentDescription="@string/image_cd_camera"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
