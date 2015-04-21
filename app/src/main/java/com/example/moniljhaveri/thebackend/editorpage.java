@@ -23,9 +23,6 @@ public class editorpage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editorpage);
 
-        Button backButton = (Button) findViewById(R.id.back_button); //The backbutton
-        backButton.setOnClickListener(editorListener);
-
         setContentView(R.layout.activity_editorpage);
         ImageView editImage = (ImageView) findViewById(R.id.image);
         Uri viewUri = getIntent().getData();
@@ -35,9 +32,10 @@ public class editorpage extends Activity {
             editImage.setImageBitmap(editBitmap);
         } catch (Exception e){
             Toast.makeText(editorpage.this, "failed to load", Toast.LENGTH_LONG).show();
-
             Log.e(logtag, e.toString());
         }
+        Button backButton = (Button) findViewById(R.id.back_button); //The backbutton
+        backButton.setOnClickListener(editorListener);
 
     }
     private View.OnClickListener editorListener = new View.OnClickListener() {
