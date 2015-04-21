@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
 public class MainActivity extends Activity{
 
     private static String logtag = "CameraApp8";
-    private static int TAKE_PICTURE = 0;
+    private static int TAKE_PICTURE = 0; //this is for the camera
     private Uri imageUri;
     private static int imageGallery_load_image = 1; //this is for accessing the image gallery
     private String selectedImagePath;
@@ -39,9 +39,10 @@ public class MainActivity extends Activity{
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.library_button:
+                case R.id.library_button: //This is what happens when you click on the library button
                     Intent libraryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(libraryIntent, imageGallery_load_image);
+                    startActivity(new Intent(MainActivity.this, editorpage.class));
                     break;
                 case R.id.camera_button:
                     takePhoto(view);
@@ -85,14 +86,15 @@ public class MainActivity extends Activity{
             //call parent
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case 1:
+            case 0:
                 if (resultCode == Activity.RESULT_OK) { //This is the activity for the camera
+
                     Uri selectedImage = imageUri;
                     getContentResolver().notifyChange(selectedImage, null);
                     ImageView imageView = (ImageView) findViewById(R.id.image_camera);
                     ContentResolver cr = getContentResolver();
                     Bitmap bitmap;
-                try {
+                    try {
                     bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, selectedImage);
                     imageView.setImageBitmap(bitmap);
                     Toast.makeText(MainActivity.this, selectedImage.toString(), Toast.LENGTH_LONG).show();
@@ -101,11 +103,13 @@ public class MainActivity extends Activity{
                     Log.e(logtag, e.toString());
 
                 }}
-            case 2: //This is what happens when you click on the library button it goes to the image library 
+            case 1:
                 if(resultCode == RESULT_OK){
                     Uri galleryUri = data.getData();
                     textTargetUri.setText(galleryUri.toString());
                     Bitmap bitmap;
+                    //startActivity(new Intent(MainActivity.this, editorpage.class));
+
                     try{
                         bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(galleryUri));
                         TakenPhoto.setImageBitmap(bitmap);
