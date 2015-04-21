@@ -2,23 +2,43 @@ package com.example.moniljhaveri.thebackend;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class editorpage extends Activity {
-
+    private static String logtag = "editor page";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editorpage);
 
-        Button backButton = (Button) findViewById(R.id.back_button);
+        Button backButton = (Button) findViewById(R.id.back_button); //The backbutton
         backButton.setOnClickListener(editorListener);
+
+        setContentView(R.layout.activity_editorpage);
+        ImageView editImage = (ImageView) findViewById(R.id.image);
+        Uri viewUri = getIntent().getData();
+        Bitmap editBitmap;
+        try {
+            editBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), viewUri);
+            editImage.setImageBitmap(editBitmap);
+        } catch (Exception e){
+            Toast.makeText(editorpage.this, "failed to load", Toast.LENGTH_LONG).show();
+
+            Log.e(logtag, e.toString());
+        }
+
     }
     private View.OnClickListener editorListener = new View.OnClickListener() {
         @Override
@@ -27,6 +47,7 @@ public class editorpage extends Activity {
                 case (R.id.back_button): {
                     Intent intent = new Intent(editorpage.this, MainActivity.class);
                     startActivity(intent);
+                    break;
                 }
 
 

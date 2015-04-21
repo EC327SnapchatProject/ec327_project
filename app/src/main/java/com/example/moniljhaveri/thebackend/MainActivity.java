@@ -121,6 +121,7 @@ public class MainActivity extends Activity {
                         bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(galleryUri));
                         TakenPhoto.setImageBitmap(bitmap);
                         Intent intent = new Intent(MainActivity.this, editorpage.class);
+                        intent.setData(galleryUri);
                         startActivity(intent);
 
                     } catch (FileNotFoundException e) {
