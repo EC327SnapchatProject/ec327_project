@@ -10,13 +10,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
 public class editorpage extends Activity {
     private static String logtag = "editor page";
+    String[] filterresources;
+    Spinner filterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class editorpage extends Activity {
         try {
             editBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), viewUri);
             editImage.setImageBitmap(editBitmap);
+            //break; //may need
         } catch (Exception e){
             Toast.makeText(editorpage.this, "failed to load", Toast.LENGTH_LONG).show();
             Log.e(logtag, e.toString());
@@ -37,6 +42,10 @@ public class editorpage extends Activity {
         Button backButton = (Button) findViewById(R.id.back_button); //The backbutton
         backButton.setOnClickListener(editorListener);
 
+        filterButton = (Spinner)findViewById(R.id.Filters);
+        filterresources = getResources().getStringArray(R.array.filters);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,filterresources);
+        filterButton.setAdapter(adapter);
     }
     private View.OnClickListener editorListener = new View.OnClickListener() {
         @Override
