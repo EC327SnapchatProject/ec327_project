@@ -9,9 +9,12 @@
     <string name="title_activity_editorpage">editorpage</string>
     <string name="back_button">Back Button</string>
     <string name="Filters">Chose a Filter</string>
-    <string-array name="filters">
-        <item>Black and White</item>
-        <item>Invert Color</item>
-        <item>Green Hue</item>
-    </string-array>
+    <string name="grey">Black and White</string>
+    <string name="invert">Invert Color</string>
+    <string name="green_filter">Greenify</string>
+    <!--<string-array name="filters">-->
+        <!--<item>Black and White</item>-->
+        <!--<item>Invert Color</item>-->
+        <!--<item>Green Hue</item>-->
+    <!--</string-array>-->
 </resources>

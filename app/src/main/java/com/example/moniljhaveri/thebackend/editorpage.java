@@ -1,13 +1,8 @@
 package com.example.moniljhaveri.thebackend;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,20 +11,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ListView;
-import java.util.ArrayList;
 
 
 public class editorpage extends Activity {
     private static String logtag = "editor page";
-    String[] filterresources;
-    Spinner filterButton;
+    //String[] filterresources;
+    //Spinner filterButton;
     Bitmap BW;
     Bitmap editBitmap;
     ImageView editImage;
@@ -55,11 +45,15 @@ public class editorpage extends Activity {
         backButton.setOnClickListener(editorListener);
         Button Filter1= (Button) findViewById(R.id.filter_button);
         Filter1.setOnClickListener(editorListener);
+        Button InvertButton = (Button) findViewById(R.id.invert_filter);
+        InvertButton.setOnClickListener(editorListener);
+        Button Greenify = (Button) findViewById(R.id.green_filter);
+        Greenify.setOnClickListener(editorListener);
 
-        filterButton = (Spinner)findViewById(R.id.Filters); //Filters buttons
-        filterresources = getResources().getStringArray(R.array.filters); //options of filters
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,filterresources);
-        filterButton.setAdapter(adapter);
+//        filterButton = (Spinner)findViewById(R.id.Filters); //Filters buttons
+//        filterresources = getResources().getStringArray(R.array.filters); //options of filters
+//        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,filterresources);
+//        filterButton.setAdapter(adapter);
     }
 
     private View.OnClickListener editorListener = new View.OnClickListener() {
@@ -77,7 +71,19 @@ public class editorpage extends Activity {
                {
                    BW = ChangeGrey(editBitmap,5,5.0,6.0,0.0);
                    editImage.setImageBitmap(BW);
+                   break;
                }
+               case (R.id.invert_filter):
+               {
+                   BW = InvertColor(editBitmap);
+                   editImage.setImageBitmap(BW);
+                   break;
+               }
+                case (R.id.green_filter):
+                {
+                    BW = Greenify(editBitmap);
+                    editImage.setImageBitmap(BW);
+                }
             }
         }
     };
@@ -103,7 +109,7 @@ public class editorpage extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static Bitmap ChangeGrey(Bitmap src, int depth, double red, double green, double blue) {
+    public static Bitmap ChangeGrey(Bitmap src, int depth, double red, double green, double blue) { //Need to cite this
         int width = src.getWidth();
         int height = src.getHeight();
         Bitmap finalBitmap = Bitmap.createBitmap(width, height, src.getConfig());
@@ -143,6 +149,69 @@ public class editorpage extends Activity {
         return finalBitmap;
     }
 
+    public static Bitmap InvertColor(Bitmap src) { //android newbie site this, also optimize this
+        // create new bitmap with the same settings as source bitmap
+        Bitmap bmOut = Bitmap.createBitmap(src.getWidth(), src.getHeight(), src.getConfig());
+        // color info
+        int A, R, G, B;
+        int pixelColor;
+        // image size
+        int height = src.getHeight();
+        int width = src.getWidth();
+
+        // scan through every pixel
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                // get one pixel
+                pixelColor = src.getPixel(x, y);
+                // saving alpha channel
+                A = Color.alpha(pixelColor);
+                // inverting byte for each R/G/B channel
+                R = 255 - Color.red(pixelColor);
+                G = 255 - Color.green(pixelColor);
+                B = 255 - Color.blue(pixelColor);
+                // set newly-inverted pixel to output image
+                bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+            }
+        }
+
+        // return final bitmap
+        return bmOut;
+
+    }
+    public static Bitmap Greenify(Bitmap src){
+        Bitmap bmOut = Bitmap.createBitmap(src.getWidth(), src.getHeight(), src.getConfig());
+        int A, R, G, B;
+        int pixelColor;
+        // image size
+        int height = src.getHeight();
+        int width = src.getWidth();
+
+        // scan through every pixel
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                // get one pixel
+                pixelColor = src.getPixel(x, y);
+                // saving alpha channel
+                A = Color.alpha(pixelColor);
+                // inverting byte for each R/G/B channel
+                R = 255 - Color.red(pixelColor);
+                G = 255;
+                B = 255 - Color.blue(pixelColor);
+                // set newly-inverted pixel to output image
+                bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+            }
+        }
+
+        // return final bitmap
+        return bmOut;
+
+
+    }
 }
 
 

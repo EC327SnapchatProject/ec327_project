@@ -15,18 +15,32 @@
      />
 
     <Button
+        android:id="@+id/green_filter"
+        android:text="@string/green_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Filter 1"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/grey"
         android:id="@+id/filter_button" />
 
-    <Spinner
-        android:id="@+id/Filters"
-        android:text="@string/Filters"
-        android:layout_height="wrap_content"
+    <Button
         android:layout_width="match_parent"
-        android:background="@android:drawable/btn_dropdown"
+        android:layout_height="wrap_content"
+        android:id="@+id/invert_filter"
+        android:text="@string/invert"
     />
+
+    <!--<Spinner-->
+        <!--android:id="@+id/Filters"-->
+        <!--android:text="@string/Filters"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@android:drawable/btn_dropdown"-->
+    <!--/>-->
 
     <ImageView
         android:id="@+id/image"

@@ -40,11 +40,11 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.library_button: //This is what happens when you click on the library button
+                case (R.id.library_button): //This is what happens when you click on the library button
                     Intent libraryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(libraryIntent, imageGallery_load_image);
                     break;
-                case R.id.camera_button:
+                case (R.id.camera_button):
                     takePhoto(view);
                     break;
             }
