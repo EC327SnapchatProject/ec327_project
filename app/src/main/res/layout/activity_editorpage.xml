@@ -33,6 +33,12 @@
         android:id="@+id/invert_filter"
         android:text="@string/invert"
     />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_button"
+        android:text="@string/save"
+    />
 
     <!--<Spinner-->
         <!--android:id="@+id/Filters"-->
